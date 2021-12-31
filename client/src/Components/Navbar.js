@@ -1,7 +1,12 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  let navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("authtoken");
+    navigate("/login");
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -19,13 +24,13 @@ const Navbar = () => {
                 <Link className="nav-link" to="/StatusForm">Status</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/Passes">Passes</Link>
+                <Link className="nav-link" style={localStorage.getItem('authtoken')?{display:"block"}:{display:'none'}} to="/Passes">Passes</Link>
               </li>
             </ul>
-            <form className="d-flex">
-              <Link to="/Login" role="button" className="btn btn-outline-success mx-2" type="submit">Login</Link>
-              <Link to="/Home" role="button" className="btn btn-outline-danger" type="submit">Logout</Link>
-            </form>
+            {!localStorage.getItem('authtoken') ? <form className="d-flex btn-group">
+              <Link to="/login" className="btn btn-outline-secondary " role="button" >Login</Link>
+              <Link to="/signup" className="btn btn-outline-secondary disabled " role="button">Signup</Link>
+            </form> : <button onClick={handleLogout} className="btn btn-outline-secondary ">Logout</button>}
           </div>
         </div>
       </nav>

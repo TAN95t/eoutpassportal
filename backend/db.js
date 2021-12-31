@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const mongoURI = "mongodb://localhost:27017/eoutpass?readPreference=primary&appname=MongoDB%20Compass&ssl=false"
-const connectToMongo = ()=>{
-    mongoose.connect(mongoURI, ()=>{
+const connectToMongo = () => {
+    mongoose.connect(mongoURI, () => {
         console.log("connected to mongo successfully")
     })
 }

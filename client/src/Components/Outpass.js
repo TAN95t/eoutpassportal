@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {} from 'react';
+import {} from 'react-router-dom';
 
 const Outpass = () => {
     return (

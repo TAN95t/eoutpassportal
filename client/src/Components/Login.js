@@ -12,13 +12,13 @@ const Login = (props) => {
             body : JSON.stringify({email: credentials.email, password: credentials.password})
         });
         const json = await response.json();
-        console.log(json);
+        //console.log(json);
         if (json.success){
             // Save the auth token and redirect
             localStorage.setItem('authtoken', json.authtoken);
             navigate("/Passes");
-            console.log("Authtoken",json.authtoken);
-            props.showAlert("Logged in successfully","success") 
+            //console.log("Authtoken",json.authtoken);
+            alert("Logged in successfully") 
         }
         else{
             alert("Invalid credentials");
@@ -36,12 +36,12 @@ const Login = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="email" aria-describedby="email" name="email" value={credentials.email} onChange={onChange}/>
+                        <input type="email" className="form-control" name="email" aria-describedby="email" value={credentials.email} id="email"onChange={onChange}/>
                             <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="password" name="password" value={credentials.password} onChange={onChange}/>
+                        <input type="password" className="form-control" name="password" value={credentials.password} id="password" onChange={onChange}/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
