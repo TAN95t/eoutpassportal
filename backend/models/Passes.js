@@ -1,42 +1,75 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const Schema = mongoose.Schema;
 
-
-const UserSchema = new Schema({
-    name:{
+const OutpassSchema = new Schema({
+    firstname: {
         type: String,
         required: true
     },
-    email:{
+    lastname: {
+        type: String,
+        required: true
+    },
+    email: {
         type: String,
         required: true,
     },
-    phone:{
+    phone: {
         type: Number,
-        required : true
+        required: true
     },
-    registration:{
+    branch: {
+        type: String,
+        required: true
+    },
+    regnumber: {
         type: Number,
-        required : true
+        required: true
     },
-    description:{
-        type: String,
-        required : true
-    },
-    date:{
-        type: Date,
-        default: Date.now
-    },
-    fromDate:{
+    block: {
         type: String,
         required: true
     },
-    toDate:{
+    roomnum: {
+        type: Number,
+        required: true
+    },
+    address1: {
         type: String,
         required: true
     },
-    address:{
+    address2: {
         type: String,
         required: true
     },
-  });
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    zip: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+
+    fromDate: {
+        type: String,
+        required: true
+    },
+    toDate: {
+        type: String,
+        required: true
+    },
+}, {
+    timestamps: true
+});
+
+const Outpass = mongoose.model('Outpass', OutpassSchema);
+module.exports = Outpass;
