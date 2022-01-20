@@ -22,7 +22,7 @@ const OutpassSchema = new Schema({
         type: String,
         required: true
     },
-    regnumber: {
+    regno: {
         type: Number,
         required: true
     },
@@ -30,7 +30,7 @@ const OutpassSchema = new Schema({
         type: String,
         required: true
     },
-    roomnum: {
+    room: {
         type: Number,
         required: true
     },
@@ -46,7 +46,7 @@ const OutpassSchema = new Schema({
         type: String,
         required: true
     },
-    state: {
+    formState: {
         type: String,
         required: true
     },
@@ -60,10 +60,18 @@ const OutpassSchema = new Schema({
     },
 
     fromDate: {
-        type: String,
+        type: Date,
         required: true
     },
     toDate: {
+        type: Date,
+        required: true
+    },
+    fromTime: {
+        type: String,
+        required: true
+    },
+    toTime: {
         type: String,
         required: true
     },
