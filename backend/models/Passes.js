@@ -51,7 +51,7 @@ const OutpassSchema = new Schema({
         required: true
     },
     zip: {
-        type: String,
+        type: Number,
         required: true
     },
     description: {
@@ -75,6 +75,11 @@ const OutpassSchema = new Schema({
         type: String,
         required: true
     },
+    verified: {
+        type: Boolean,
+        required: false,
+        default: false
+    }
 }, {
     timestamps: true
 });
