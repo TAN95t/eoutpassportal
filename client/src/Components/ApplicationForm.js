@@ -2,6 +2,8 @@ import { useReducer } from "react";
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import TimePicker from 'react-time-picker';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 // const initialState = {
 //     firstname: '',
@@ -66,7 +68,28 @@ const ApplicationForm = () => {
     //     // })
     //     window.location.reload();
     // }
-    const { register, handleSubmit } = useForm();
+    const schema = yup.object({
+        firstName: yup.string().max(50).required(),
+        lastName: yup.string().max(50).required(),
+        email: yup.string().email().required(),
+        phone: yup.number().min(10).max(10).positive().integer().required(),
+        branch: yup.string().max(50).required(),
+        regno: yup.number().min(9).max(9).positive().integer().required(),
+        block: yup.string().length(2).required(),
+        room: yup.number().min(3).max(3).positive().integer().required(),
+        address1: yup.string().max(70).required(),
+        address2: yup.string().max(70).required(),
+        city: yup.string().max(40).required(),
+        appFormState: yup.string().max(40).required(),
+        zip: yup.number().min(6).max(6).positive().integer().required(),
+        description: yup.string().max(100).required(),
+        fromDate: yup.date().required(),
+        fromTime: yup.string().required(),
+        toDate: yup.date().required(),
+        toTime: yup.string().required(),
+    }).required();
+
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const onSubmit = (data) => {
         console.log(data);
         axios.post('http://localhost:5000/outpass/add', data)
@@ -87,56 +110,80 @@ const ApplicationForm = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row my-2">
                             <div className="col">
+                                <label className="form-label">First Name : </label>
                                 <input className="form-control" placeholder="First name"{...register("firstName")} />
+                                <p>{errors.firstName?.message}</p>
                             </div>
                             <div className="col">
+                                <label className="form-label">Last Name : </label>
                                 <input className="form-control" placeholder="Last name"{...register("lastName")} />
+                                <p>{errors.lastName?.message}</p>
                             </div>
                         </div>
                         <div className="row my-2">
                             <div className="col">
+                                <label className="form-label">Email : </label>
                                 <input className="form-control" placeholder="Email" {...register("email")} />
+                                <p>{errors.email?.message}</p>
                             </div>
                             <div className="col">
+                                <label className="form-label">Phone : </label>
                                 <input className="form-control" placeholder="Phone" {...register("phone")} />
+                                <p>{errors.phone?.message}</p>
                             </div>
                         </div>
                         <div className="row my-2">
                             <div className="col">
+                                <label className="form-label">Branch : </label>
                                 <input className="form-control" placeholder="Branch" {...register("branch")} />
+                                <p>{errors.branch?.message}</p>
                             </div>
                             <div className="col">
+                                <label className="form-label">Registration no. : </label>
                                 <input className="form-control" placeholder="Registration Number" {...register("regno")} />
+                                <p>{errors.regno?.message}</p>
                             </div>
                         </div>
                         <div className="row my-2">
                             <div className="col">
+                                <label className="form-label">Block : </label>
                                 <input className="form-control" placeholder="Block" {...register("block")} />
+                                <p>{errors.block?.message}</p>
                             </div>
                             <div className="col">
+                                <label className="form-label">Room no. : </label>
                                 <input className="form-control" placeholder="Room Number" {...register("room")} />
+                                <p>{errors.room?.message}</p>
                             </div>
                         </div>
                         <div className="row">
                             <h3 className="text-center">Leave Address</h3>
                         </div>
                         <div className="col-12">
-                            <label htmlFor="inputAddress" className="form-label">Address 1</label>
+                            <label htmlFor="inputAddress" className="form-label">Address 1 : </label>
                             <input className="form-control" id="inputAddress" placeholder="1234 Main St" {...register("address1")} />
+                            <p>{errors.address1?.message}</p>
                         </div>
                         <div className="col-12">
-                            <label htmlFor="inputAddress2" className="form-label">Address 2</label>
+                            <label htmlFor="inputAddress2" className="form-label">Address 2 : </label>
                             <input className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" {...register("address2")} />
+                            <p>{errors.address2?.message}</p>
                         </div>
                         <div className="row g-3 my-2">
                             <div className="col-sm-7">
+                                <label className="form-label">City : </label>
                                 <input className="form-control" placeholder="City" {...register("city")} />
+                                <p>{errors.city?.message}</p>
                             </div>
                             <div className="col-sm">
-                                <input className="form-control" placeholder="State" {...register("formState")} />
+                                <label className="form-label">State : </label>
+                                <input className="form-control" placeholder="State" {...register("appFormState")} />
+                                <p>{errors.appFormState?.message}</p>
                             </div>
                             <div className="col-sm">
+                                <label className="form-label">Zip : </label>
                                 <input className="form-control" placeholder="Zip" {...register("zip")} />
+                                <p>{errors.zip?.message}</p>
                             </div>
                         </div>
                         <div className="row">
@@ -145,6 +192,7 @@ const ApplicationForm = () => {
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">Description</label>
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" {...register("description")} ></textarea>
+                            <p>{errors.description?.message}</p>
                         </div>
                         <div className="row">
                             <h3 className="text-center">Date and Time</h3>
@@ -153,16 +201,20 @@ const ApplicationForm = () => {
                             <h5 className="col-sm-1">From </h5>
                             <div className="col">
                                 <input type="date" className="form-control" placeholder="From Date" {...register("fromDate")} />
+                                <p>{errors.fromDate?.message}</p>
                             </div>
                             <div className="col">
                                 <input type="text" className="form-control" placeholder="Time" {...register("fromTime")} />
+                                <p>{errors.fromTime?.message}</p>
                             </div>
                             <h5 className="col-sm-1">To </h5>
                             <div className="col">
                                 <input type="date" className="form-control" placeholder="To Date" {...register("toDate")} />
+                                <p>{errors.toDate?.message}</p>
                             </div>
                             <div className="col">
                                 <input type="text" className="form-control" placeholder="Time" {...register("toTime")} />
+                                <p>{errors.toTime?.message}</p>
                             </div>
                         </div>
                         <div className="d-grid gap-2 col-4 mx-auto my-4">
