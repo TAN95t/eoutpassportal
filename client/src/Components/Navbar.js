@@ -5,13 +5,13 @@ const Navbar = () => {
   let navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("authtoken");
-    navigate("/login");
+    navigate("/Login");
   }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/Home">E-OutPass</Link>
+          <Link className="navbar-brand" to="/Passes">E-OutPass</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -24,13 +24,13 @@ const Navbar = () => {
                 <Link className="nav-link" to="/StatusForm">Status</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" style={localStorage.getItem('authtoken')?{display:"block"}:{display:'none'}} to="/Passes">Passes</Link>
+                <Link className="nav-link" /*style={localStorage.getItem('authtoken')?{display:"block"}:{display:'none'}}*/ to="/Passes">Passes</Link>
               </li>
             </ul>
             {!localStorage.getItem('authtoken') ? <form className="d-flex btn-group">
               <Link to="/login" className="btn btn-outline-secondary " role="button" >Login</Link>
               <Link to="/signup" className="btn btn-outline-secondary disabled " role="button">Signup</Link>
-            </form> : <button onClick={handleLogout} className="btn btn-outline-secondary ">Logout</button>}
+            </form> : <button onClick={() => handleLogout} className="btn btn-outline-secondary ">Logout</button>}
           </div>
         </div>
       </nav>
