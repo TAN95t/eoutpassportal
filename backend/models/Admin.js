@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const UserSchema = new Schema({
+const AdminSchema = new Schema({
     name:{
         type: String,
         required: true
@@ -20,6 +20,6 @@ const UserSchema = new Schema({
         default: Date.now
     },
   });
-  const User = mongoose.model('user', UserSchema);
-  User.createIndexes();
-  module.exports = User;
+  const Admin = mongoose.model('admin', AdminSchema);
+  Admin.createIndexes();
+  module.exports = Admin;
