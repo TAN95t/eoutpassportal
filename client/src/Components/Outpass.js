@@ -1,5 +1,5 @@
-import React, {} from 'react';
-import {} from 'react-router-dom';
+import React, { } from 'react';
+import { } from 'react-router-dom';
 
 const Outpass = () => {
     return (
@@ -13,4 +13,4 @@ const Outpass = () => {
     )
 }
 
-export default Outpass
+export default Outpass;

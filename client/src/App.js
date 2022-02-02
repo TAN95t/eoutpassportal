@@ -4,9 +4,9 @@ import Navbar from "./Components/Navbar";
 import ApplicationForm from './Components/ApplicationForm';
 import StatusForm from './Components/StatusForm';
 import Login from './Components/Login';
-import Passes from './Components/Outpass';
+import Passes from './Components/Passes';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -14,15 +14,19 @@ import {
 function App() {
   return (
     <>
-    <Router>
-    <Navbar/>
-    <Routes>
-      <Route exact path = "/ApplicationForm" element={<ApplicationForm/>}/>
-      <Route exact path = "/StatusForm" element={<StatusForm/>}/>
-      <Route exact path = "/Passes" element={<Passes/>}/>
-      <Route exact path = "/Login" element={<Login/>}/>
-    </Routes>
-    </Router>
+      <BrowserRouter>
+        <Navbar />
+        <div style={{ marginTop: "70px" }}>
+          <Routes>
+            <Route path="/">
+              <Route path="ApplicationForm" element={<ApplicationForm />} />
+              <Route path="StatusForm" element={<StatusForm />} />
+              <Route path="Passes" element={<Passes />} />
+              <Route path="Login" element={<Login />} />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </>
   );
 }
